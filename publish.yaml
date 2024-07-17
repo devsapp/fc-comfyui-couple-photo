@@ -3,7 +3,7 @@ Type: Project
 Name: fc-comfyui-couple-photo
 Provider:
   - 阿里云
-Version: dev
+Version: 0.0.1
 Description: 使用 ComfyUI 实现跨次元壁合照
 HomePage: https://github.com/OhYee/fc-comfyui
 Tags:
@@ -28,6 +28,7 @@ Parameters:
       enum:
         - cn-hangzhou
         - cn-shanghai
+        - ap-northeast-1
     namespace:
       title: 命名空间
       type: string
