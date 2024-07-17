@@ -1,0 +1,89 @@
+edition: 3.0.0 #  命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
+name: fc-stable-diffusion
+access: '{{ access }}'
+vars:
+  region: '{{ region }}'
+  prefix: '{{ namespace }}'
+  imageVersion: 'v1'
+  imageUrl: 'registry.${vars.region}.aliyuncs.com/ohyee/fc-demo:fc-comfyui-couplephoto-${vars.imageVersion}'
+
+resources:
+  comfyui:
+    component: fc3
+    actions:
+    props:
+      region: ${vars.region}
+      functionName: '${vars.prefix}__comfyui'
+      description: 'ComfyUI 函数'
+
+      # 实例规格
+      timeout: 600
+      diskSize: 512
+      cpu: 4
+      memorySize: 16384
+      instanceConcurrency: 1
+      gpuConfig:
+        gpuMemorySize: 12288
+        gpuType: fc.gpu.ampere.1
+
+      # 运行时
+      runtime: custom-container
+      customContainerConfig:
+        port: 9000
+        image: ${vars.imageUrl}
+
+      environmentVariables:
+        USE_AGENT: 'true'
+
+      triggers:
+        - triggerConfig:
+            methods:
+              - GET
+              - POST
+            authType: anonymous
+            disableURLInternet: false
+          triggerName: defaultTrigger
+          description: ''
+          qualifier: LATEST
+          triggerType: http
+
+  web:
+    component: fc3
+    actions:
+    props:
+      region: '${vars.region}'
+      functionName: '${vars.prefix}__web'
+      description: 'AI 跨次元壁合照'
+      timeout: 300
+      diskSize: 512
+      runtime: custom
+      cpu: 1
+      memorySize: 1024
+      instanceConcurrency: 100
+      code: web/dist
+      customRuntimeConfig:
+        port: 9000
+        command:
+          - node
+        args:
+          - index.js
+      environmentVariables:
+        ENDPOINT: '${resources.comfyui.output.url.system_url}'
+
+  custom-domain:
+    component: fc3-domain
+    props: #  组件的属性值
+      region: ${vars.region}
+      domainName: auto
+      protocol: HTTP
+      routeConfig:
+        routes:
+          - functionName: ${resources.web.props.functionName}
+            methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            path: /*
+            qualifier: LATEST

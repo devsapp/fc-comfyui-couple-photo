@@ -1,0 +1,152 @@
+.title {
+  background: rgb(96, 93, 227);
+  border-radius: 12px 0 12px 0;
+  display: inline-block;
+  padding: 0.1em 1em;
+  font-weight: bold;
+}
+
+.title-inside {
+  border-radius: 12px 0 12px 0;
+  display: inline-block;
+  padding: 0.1em 1em;
+  font-weight: bold;
+}
+
+.description {
+  color: #999;
+  font-size: 0.8em;
+  margin: 0 1em;
+}
+
+/** 图像上传 */
+.image_wrapper {
+  width: 100%;
+  border: 2px dashed #666;
+  border-radius: 12px;
+
+  /** 展示框 */
+  .image_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .mask {
+      position: absolute;
+      inset: 0;
+
+      display: flex;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      justify-content: center;
+      opacity: 0;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.3);
+        opacity: 1;
+      }
+    }
+  }
+
+
+  .scroll-item {
+    text-align: center;
+    height: 100%;
+    // margin: 0 0.5em;
+    flex: 0 0 auto;
+    padding: 0.5em;
+
+    img {
+      height: calc(100% - 20px);
+    }
+
+    span {
+      display: block;
+    }
+
+    &:hover {
+      background-color: #333;
+      span {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.scrollbar {
+  overflow: hidden;
+  overflow-y: auto;
+  padding-right: 10px;
+  width: calc(100% + 10px) !important;
+
+  /* 设置滚动条的样式 */
+  &::-webkit-scrollbar {
+    width: 8px;
+    align-items: end;
+    justify-content: end;
+  }
+
+  /* 滚动槽 */
+  &::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  /* 滚动条滑块 */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #aaa;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+
+  &::-webkit-scrollbar-thumb:window-inactive {
+    background: #fff;
+  }
+}
+
+.scrollbar-y {
+  overflow: hidden;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  // width: calc(100% + 10px) !important;
+
+  /* 设置滚动条的样式 */
+  &::-webkit-scrollbar {
+    height: 8px;
+    align-items: end;
+    justify-content: end;
+  }
+
+  /* 滚动槽 */
+  &::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  /* 滚动条滑块 */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #aaa;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+
+  &::-webkit-scrollbar-thumb:window-inactive {
+    background: #fff;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
