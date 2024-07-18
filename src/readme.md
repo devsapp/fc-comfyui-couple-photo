@@ -88,6 +88,10 @@ Stable Diffusion 是一款由 CompVis、Stability AI 和 LAION 的研究人员�
 
 只需要打开页面，点击开始创作！
 
+![](https://img.alicdn.com/imgextra/i1/O1CN01QHYPqD1YpyLA6lkXc_!!6000000003109-0-tps-1928-1114.jpg)
+
+![](https://img.alicdn.com/imgextra/i4/O1CN01RmRrA225lHbhYfoPc_!!6000000007566-0-tps-1788-2270.jpg)
+
 </usedetail>
 
 ## 注意事项
