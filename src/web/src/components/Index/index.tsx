@@ -1,8 +1,8 @@
-import { ComfyUIPrompt, ComfyUIPromptEditPanel } from '@/utils/api';
+import { ComfyUIPrompt,ComfyUIPromptEditPanel } from '@/utils/api';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { PageHeader } from '@ant-design/pro-components';
 import { useRequest } from 'ahooks';
-import { Radio, Space, Tooltip, Typography } from 'antd';
+import { Radio,Space,Tooltip,Typography } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Pipeline } from '../Pipeline';
@@ -42,9 +42,26 @@ export default function () {
   return (
     <Space direction='vertical' style={{ padding: 24, width: '100%' }}>
       <PageHeader
-        title='阿里云X优酷  Create@AI江湖创作大赛'
+        title={
+          <a
+            href='https://startup.aliyun.com/create/snbm'
+            target='_blank'
+            style={{ color: 'white' }}
+          >
+            阿里云X优酷 Create@AI江湖创作大赛
+          </a>
+        }
         subTitle={
-          <span style={{ marginLeft: '4em' }}>阿里云函数计算提供计算资源</span>
+          <Typography.Text>
+            <a
+              href='https://www.aliyun.com/product/fc'
+              target='_blank'
+              style={{ color: 'white', textDecoration: 'underline' }}
+            >
+              阿里云函数计算
+            </a>{' '}
+            提供计算资源
+          </Typography.Text>
         }
       />
 
