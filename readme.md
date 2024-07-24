@@ -36,7 +36,14 @@
 
 使用该项目，您需要有开通以下服务并拥有对应权限：
 
+
 <service>
+
+
+| 服务/业务 |  权限  | 相关文档 |
+| --- |  --- | --- |
+| 函数计算 |  创建函数 | [帮助文档](https://help.aliyun.com/product/2508973.html) [计费文档](https://help.aliyun.com/document_detail/2512928.html) |
+
 </service>
 
 <remark>
