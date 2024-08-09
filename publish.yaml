@@ -3,7 +3,7 @@ Type: Project
 Name: fc-comfyui-couple-photo
 Provider:
   - 阿里云
-Version: 0.0.5
+Version: 0.0.6
 Description: 使用 ComfyUI 实现跨次元壁合照
 HomePage: https://github.com/OhYee/fc-comfyui
 Tags:
@@ -23,7 +23,8 @@ Parameters:
     region:
       title: 地域
       type: string
-      default: cn-shanghai
+      # default: cn-shanghai
+      default: ap-northeast-1
       description: 创建应用所在的地区。由于当前模板涉及 Github 以及 HuggingFace 等网站访问，国内部分地区可能无法直接使用
       enum:
         - cn-hangzhou

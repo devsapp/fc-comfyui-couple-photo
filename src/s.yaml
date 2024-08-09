@@ -24,7 +24,8 @@ resources:
       instanceConcurrency: 1
       gpuConfig:
         gpuMemorySize: 12288
-        gpuType: fc.gpu.ampere.1
+        # gpuType: fc.gpu.tesla.1 # T4
+        gpuType: fc.gpu.ampere.1 # A10
 
       # 运行时
       runtime: custom-container
