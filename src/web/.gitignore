@@ -2,3 +2,5 @@ node_modules/*
 src/.umi
 src/.umi-production
 dist
+
+public/data.json

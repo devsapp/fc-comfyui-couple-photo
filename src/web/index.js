@@ -31,15 +31,6 @@ http
     }
 
     fs.readFile(filePath, function (error, content) {
-      if (filePath === './src__pages__index.async.js' && !!content) {
-        content = content
-          .toString()
-          .replace(
-            'c410d179b056797269a4a2188bdf8a48',
-            process.env['ENDPOINT'] || ''
-          );
-      }
-
       if (error) {
         if (error.code == 'ENOENT') {
           response.writeHead(400);

@@ -48,7 +48,7 @@ export function Panel<T extends string | number>(props: {
           {panel?.description && (
             <div className={styles.description}>{panel?.description}</div>
           )}
-          <Space direction='vertical' style={{ padding: 12 }}>
+          <Space direction='vertical' style={{ padding: 12, width: '100%' }}>
             {(panel?.children || []).map((p) => (
               <Panel
                 key={[

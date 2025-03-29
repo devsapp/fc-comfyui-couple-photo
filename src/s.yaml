@@ -4,57 +4,22 @@ access: '{{ access }}'
 vars:
   region: '{{ region }}'
   prefix: '{{ namespace }}'
-  imageVersion: 'v1'
-  imageUrl: 'registry.${vars.region}.aliyuncs.com/ohyee/fc-demo:fc-comfyui-couplephoto-${vars.imageVersion}'
+  endpoint: '{{ endpoint }}'
 
 resources:
-  comfyui:
-    component: fc3
-    actions:
-    props:
-      region: ${vars.region}
-      functionName: '${vars.prefix}__comfyui'
-      description: 'ComfyUI 函数'
-
-      # 实例规格
-      timeout: 600
-      diskSize: 512
-      cpu: 4
-      memorySize: 16384
-      instanceConcurrency: 1
-      gpuConfig:
-        gpuMemorySize: 12288
-        # gpuType: fc.gpu.tesla.1 # T4
-        gpuType: fc.gpu.ampere.1 # A10
-
-      # 运行时
-      runtime: custom-container
-      customContainerConfig:
-        port: 9000
-        image: ${vars.imageUrl}
-
-      environmentVariables:
-        USE_AGENT: 'true'
-
-      triggers:
-        - triggerConfig:
-            methods:
-              - GET
-              - POST
-            authType: anonymous
-            disableURLInternet: false
-          triggerName: defaultTrigger
-          description: ''
-          qualifier: LATEST
-          triggerType: http
-
   web:
     component: fc3
     actions:
+      pre-deploy: # 项目deploy执行之前执行
+        - run: |
+            cat > data.json << EOF
+            {{ config }}
+            EOF
+          path: ./web/dist # 命令行运行的路径
     props:
       region: '${vars.region}'
       functionName: '${vars.prefix}__web'
-      description: 'AI 跨次元壁合照'
+      description: 'ComfyUI 工具箱'
       timeout: 300
       diskSize: 512
       runtime: custom
@@ -68,8 +33,6 @@ resources:
           - node
         args:
           - index.js
-      environmentVariables:
-        ENDPOINT: '${resources.comfyui.output.url.system_url}'
 
   custom-domain:
     component: fc3-domain

@@ -30,7 +30,7 @@ export function Pipeline(props: {
   const [progresses, setProgresses] = React.useState<ComfyUIProgress[]>([]);
   const [promptValue, setPromptValue] = React.useState(prompt);
   const [results, setResults] = React.useState([] as string[]);
-  const [batch, setBatch] = React.useState(4);
+  const [batch, setBatch] = React.useState(1);
 
   React.useEffect(() => {
     setPromptValue(prompt);
@@ -65,7 +65,7 @@ export function Pipeline(props: {
   return (
     <ImageProvider endpoint={endpoint}>
       <div style={{ display: 'flex' }}>
-        <div style={{ maxWidth: 400, flex: '1 1 300px' }}>
+        <div style={{ maxWidth: 500, flex: '1 1 500px' }}>
           <Card>
             <Space direction='vertical' size='large' style={{ width: '100%' }}>
               <Space
@@ -120,6 +120,7 @@ export function Pipeline(props: {
                 size='large'
                 type='primary'
                 loading={loading}
+                disabled={!endpoint}
                 style={{ width: '100%', fontSize: '1.5em', height: '2.5em' }}
                 onClick={async () => {
                   try {

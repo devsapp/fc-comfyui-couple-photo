@@ -1,11 +1,11 @@
 Edition: 3.0.0
 Type: Project
-Name: fc-comfyui-couple-photo
+Name: fc-comfyui-toolbox
 Provider:
   - 阿里云
-Version: 0.0.6
-Description: 使用 ComfyUI 实现跨次元壁合照
-HomePage: https://github.com/OhYee/fc-comfyui
+Version: 0.0.1
+Description: ComfyUI 工具箱
+HomePage: https://github.com/OhYee/fc-comfyui-couple-photo
 Tags:
   - 部署函数
 Category: 人工智能
@@ -23,9 +23,7 @@ Parameters:
     region:
       title: 地域
       type: string
-      # default: cn-shanghai
-      default: ap-northeast-1
-      description: 创建应用所在的地区。由于当前模板涉及 Github 以及 HuggingFace 等网站访问，国内部分地区可能无法直接使用
+      default: cn-hangzhou
       enum:
         - cn-hangzhou
         - cn-shanghai
@@ -33,5 +31,13 @@ Parameters:
     namespace:
       title: 命名空间
       type: string
-      default: photo-${default-suffix}
+      default: comfyui-toolbox-${default-suffix}
       description: 您可以根据需要多次创建该应用，通过命名空间来区分出不同的镜像地址
+    config:
+      title: 页面配置
+      type: string
+      default: '{"title":"ComfyUI 工具箱", "endpoint": "https://example.com", "workflows": []}'
+      description: |
+        页面配置，格式为 JSON 字符串，发布后可以在 WebIDE 修改 ./data.json 修改。
+        注意，需要将您的 ComfyUI 地址配置在 endpoint 字段，可以使用函数 http 触发器，也可以使用自定义域名。
+        同时，ComfyUI 函数需要开启 Serverless API 能力（配置环境变量 USE_AGENT: true）

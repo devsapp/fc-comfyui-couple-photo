@@ -1,7 +1,7 @@
 WEB_ROOT:=src/web
 
 ${WEB_ROOT}/dist/index.html: $(shell find ${WEB_ROOT}/src -type f)
-	cd ${WEB_ROOT} && npm run build
+	cd ${WEB_ROOT} && npm run build && rm -f data.json
 
 ${WEB_ROOT}/dist/index.js: ${WEB_ROOT}/index.js
 	cp ${WEB_ROOT}/index.js ${WEB_ROOT}/dist/index.js

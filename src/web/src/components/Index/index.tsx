@@ -1,30 +1,36 @@
-import { ComfyUIPrompt,ComfyUIPromptEditPanel } from '@/utils/api';
+import { ComfyUIPrompt, ComfyUIPromptEditPanel } from '@/utils/api';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { PageHeader } from '@ant-design/pro-components';
 import { useRequest } from 'ahooks';
-import { Radio,Space,Tooltip,Typography } from 'antd';
+import { Radio, Space, Tooltip, Typography } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Pipeline } from '../Pipeline';
 
-const SIZE = 512;
-const DEFAULT_ENDPOINT_HASH = 'c410d179b056797269a4a2188bdf8a48'; // 用来方便在混淆后替换环境变量的值
-
 export default function () {
   const [key, setKey] = React.useState('');
 
-  const { data: prompts } = useRequest(
+  const { data } = useRequest(
     async () =>
-      (
-        await axios.get(
-          `https://serverless-tool-images.oss-cn-hangzhou.aliyuncs.com/aigc/json/couple.json`
-        )
-      )?.data as {
+      (await axios.get('/data.json'))?.data as {
+        title: string;
+        endpoint: string;
+        workflows: {
+          title: string;
+          prompt: ComfyUIPrompt;
+          params: ComfyUIPromptEditPanel[];
+        }[];
+      },
+    {}
+  );
+  const prompts = React.useMemo(
+    () =>
+      data?.workflows as unknown as {
         title: string;
         prompt: ComfyUIPrompt;
         params: ComfyUIPromptEditPanel[];
       }[],
-    {}
+    [data]
   );
 
   const prompt = React.useMemo(() => {
@@ -48,7 +54,7 @@ export default function () {
             target='_blank'
             style={{ color: 'white' }}
           >
-            阿里云X优酷 Create@AI江湖创作大赛
+            {data?.title}
           </a>
         }
         subTitle={
@@ -105,7 +111,7 @@ export default function () {
 
       {prompt ? (
         <Pipeline
-          endpoint={DEFAULT_ENDPOINT_HASH}
+          endpoint={data?.endpoint || ''}
           prompt={prompt}
           params={params}
         />
